@@ -41,11 +41,13 @@ jobs:
             username: ${{ secrets.USER }}
             key: ${{ secrets.SSH_KEY }}
             script: |
-              #delete all dangling data (containers, networks, and images)
-              sudo docker system prune
               # Выполняет pull образа с DockerHub
               sudo docker pull soliton80/flower_pages
+              #остановка всех контейнеров
+              sudo docker stop $(sudo docker ps -a -q)
               sudo docker run --restart always -d -p 80:4173 soliton80/flower_pages
+              #delete all dangling data (containers, networks, and images)
+              sudo docker system prune
 
   send_message: 
       runs-on: ubuntu-latest
