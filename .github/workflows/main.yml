@@ -42,7 +42,7 @@ jobs:
             key: ${{ secrets.SSH_KEY }}
             script: |
               # Выполняет pull образа с DockerHub
-              sudo docker pull soliton80/infra_actions
+              sudo docker pull soliton80/flower_pages
               #остановка всех контейнеров
               sudo docker stop $(sudo docker ps -a -q)
               sudo docker run --rm -d -p 80:4173 soliton80/flower_pages
