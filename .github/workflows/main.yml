@@ -43,8 +43,8 @@ jobs:
             script: |
               # Выполняет pull образа с DockerHub
               sudo docker pull soliton80/flower_pages
-              #остановка всех контейнеров
-              sudo docker stop $(sudo docker ps -a -q)
+              #delete all dangling data (containers, networks, and images)
+              sudo docker system prune
               sudo docker run --restart always -d -p 80:4173 soliton80/flower_pages
 
   send_message: 
