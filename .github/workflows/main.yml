@@ -45,7 +45,7 @@ jobs:
               sudo docker pull soliton80/flower_pages
               #остановка всех контейнеров
               sudo docker stop $(sudo docker ps -a -q)
-              sudo docker run --rm -d -p 80:4173 soliton80/flower_pages
+              sudo docker run --restart always -d -p 80:4173 soliton80/flower_pages
 
   send_message: 
       runs-on: ubuntu-latest
