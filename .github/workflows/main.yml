@@ -41,13 +41,15 @@ jobs:
             username: ${{ secrets.USER }}
             key: ${{ secrets.SSH_KEY }}
             script: |
-              # Выполняет pull образа с DockerHub
               sudo docker pull soliton80/flower_pages
-              #остановка всех контейнеров
               sudo docker stop $(sudo docker ps -a -q)
               sudo docker run --restart always -d -p 80:4173 soliton80/flower_pages
               #delete all dangling data (containers, networks, and images)
               sudo docker system prune -f
+              sudo docker run -it --rm --name certbot \
+              -v "/etc/letsencrypt:/etc/letsencrypt" \
+              -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
+              certbot/certbot certonly
 
   send_message: 
       runs-on: ubuntu-latest
