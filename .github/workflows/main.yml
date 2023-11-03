@@ -42,14 +42,13 @@ jobs:
             key: ${{ secrets.SSH_KEY }}
             script: |
               sudo docker pull soliton80/flower_pages
-              sudo docker stop $(sudo docker ps -a -q)
-              sudo docker run --restart always -d -p 80:4173 soliton80/flower_pages
+              if sudo docker ps -a --filter "name=flower_pages" --format '{{.Names}}' | grep -q 'flower_pages'
+              then sudo docker stop flower_pages; sudo docker rm flower_pages
+              else echo "there is no such container"
+              fi
+              sudo docker run --restart always -d --network=infra_app-network --name flower_pages soliton80/flower_pages
               #delete all dangling data (containers, networks, and images)
               sudo docker system prune -f
-              sudo docker run -it --rm --name certbot \
-              -v "/etc/letsencrypt:/etc/letsencrypt" \
-              -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
-              certbot/certbot certonly
 
   send_message: 
       runs-on: ubuntu-latest

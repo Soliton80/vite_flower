@@ -3,6 +3,6 @@ WORKDIR /app
 COPY package.json . 
 RUN npm i 
 COPY . . 
-EXPOSE 4173
+EXPOSE 4420
 RUN npm run build
 CMD ["npm", "run", "preview"]
