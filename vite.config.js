@@ -6,6 +6,8 @@ export default defineConfig({
     port: 5173,
   },
   preview: {
-    port: 4420, 
+    port: 4420,
+    host: true,
+    allowedHosts: ['flower_pages', '.flower_pages'],
   },
 })
