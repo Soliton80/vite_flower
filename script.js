@@ -2,6 +2,7 @@ import * as THREE from "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.151.0/
 
 const canvasEl = document.querySelector("#canvas");
 const toggleEl = document.querySelector(".render-toggle");
+const emailLink = document.querySelector("#emailLink");
 
 let pointer = {
     x: .65,
@@ -53,6 +54,19 @@ window.addEventListener("resize", updateSize);
 
     window.addEventListener("click", handleClickOrTouch);
     window.addEventListener("touchstart", handleClickOrTouch);
+
+    if (emailLink) {
+        emailLink.addEventListener("click", function(e) {
+            e.preventDefault();
+            pointer.x = 0.5;
+            pointer.y = 0.5;
+            pointer.clicked = true;
+            isRendering = true;
+            setTimeout(function() {
+                window.location.href = "mailto:kate@sukhareva.life";
+            }, 300);
+        });
+    }
 
 render();
 

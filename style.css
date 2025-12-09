@@ -39,11 +39,30 @@ canvas {
     left: 0;
     bottom: 0;
     z-index: 1;
-    font-family: sans-serif;
+    font-family: 'Dancing Script', cursive;
     font-size: 15px;
     text-shadow: 0 0 4px #ffffff;
     user-select: none;
     padding: 0 0 15px 20px;
     cursor: pointer;
+    text-decoration: underline;
+}
+
+.email {
+    position: fixed;
+    right: 20px;
+    bottom: 15px;
+    z-index: 1;
+    font-family: 'Dancing Script', cursive;
+    font-size: 15px;
+}
+
+.email a {
+    color: black;
+    text-decoration: none;
+    text-shadow: 0 0 4px #ffffff;
+}
+
+.email a:hover {
     text-decoration: underline;
 }
