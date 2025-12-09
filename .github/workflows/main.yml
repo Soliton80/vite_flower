@@ -41,6 +41,7 @@ jobs:
             username: ${{ secrets.USER }}
             key: ${{ secrets.SSH_KEY }}
             script: |
+              echo "${{ secrets.DOCKERHUB_TOKEN }}" | sudo docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
               sudo docker pull soliton80/flower_pages
               if sudo docker ps -a --filter "name=flower_pages" --format '{{.Names}}' | grep -q 'flower_pages'
               then sudo docker stop flower_pages; sudo docker rm flower_pages
